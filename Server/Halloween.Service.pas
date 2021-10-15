@@ -56,6 +56,8 @@ type
       [XDefault(0)] Page: Integer = 0): TStream;
 
     [HttpGet] function GetPicture(Pic: string): TStream;
+
+    procedure AddVote([FromQuery] Entry: string);
   end;
 
 implementation

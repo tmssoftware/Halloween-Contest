@@ -19,6 +19,7 @@ type
     function AddEntry(Entry: TEntryData): string;
     function GetEntries(Per_Page: Integer = 0; Page: Integer = 0): TStream;
     function GetPicture(Pic: string): TStream;
+    procedure AddVote(Entry: string);
   end;
 
 implementation
@@ -32,6 +33,28 @@ uses
   Halloween.Entities;
 
 { THalloweenService }
+
+procedure THalloweenService.AddVote(Entry: string);
+var
+  DBEntry: TDBEntry;
+  IPAddress: string;
+  DBVote: TDBVote;
+begin
+  DBEntry := Manager.Find<TDBEntry>(Entry);
+  if DBEntry = nil then
+    raise EXDataHttpException.CreateFmt(400, 'Entry "%s" does not exist', [Entry]);
+
+  IPAddress := Context.Request.RemoteIp;
+  DBVote := Manager.Find<TDBVote>.Where(Linq['IPAddress'] = IPAddress).UniqueResult;
+  if DBVote <> nil then
+    raise EXDataHttpException.Create(400, 'You have already voted');
+
+  DBVote := TDBVote.Create;
+  Manager.AddOwnership(DBVote);
+  DBVote.Entry := DBEntry;
+  DBVote.IPAddress := IPAddress;
+  Manager.Save(DBVote);
+end;
 
 function THalloweenService.Context: TXDataOperationContext;
 begin
