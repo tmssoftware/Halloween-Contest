@@ -3,7 +3,7 @@ unit Halloween.Service;
 interface
 
 uses
-  System.Generics.Collections,
+  System.Generics.Collections, System.Classes,
   Bcl.Json.Attributes,
   Bcl.Json.NamingStrategies,
   XData.Service.Common;
@@ -54,6 +54,8 @@ type
 
     [HttpGet] function GetEntries([XDefault(0)] Per_Page: Integer = 0;
       [XDefault(0)] Page: Integer = 0): TStream;
+
+    [HttpGet] function GetPicture(Pic: string): TStream;
   end;
 
 implementation

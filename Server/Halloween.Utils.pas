@@ -31,7 +31,8 @@ end;
 
 function ImageUrl(const Id: string): string;
 begin
-  Result := TPath.GetFileName(ImageFile(Id));
+//  Result := TPath.GetFileName(ImageFile(Id));
+  Result := Id;
 end;
 
 end.
