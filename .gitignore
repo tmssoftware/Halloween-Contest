@@ -67,3 +67,5 @@ __recovery/
 
 # Application-specific ignores
 Server/HalloweenServer.res
+Server/Win32/Debug/halloween.db
+Server/Win32/Debug/Images
