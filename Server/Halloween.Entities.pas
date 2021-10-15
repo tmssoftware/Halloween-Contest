@@ -3,13 +3,15 @@ unit Halloween.Entities;
 interface
 
 uses
-  System.DateUtils,
+  System.DateUtils, System.Generics.Collections,
   Aurelius.Mapping.Attributes,
   Aurelius.Id.Guid,
   Aurelius.Types.Blob,
   Aurelius.Types.Proxy;
 
 type
+  TDBVote = class;
+
   [Entity, Automapping]
   [Table('Entries')]
   [Id('FId', TSmartGuid32LowerGenerator)]
@@ -25,8 +27,12 @@ type
     FCountry: string;
     FLanguage: string;
     FLanguageInspiration: string;
+    [ManyValuedAssociation([TAssociationProp.Lazy], CascadeTypeAllRemoveOrphan, 'FEntry')]
+    FVotes: Proxy<TList<TDBVote>>;
+    function GetVotes: TList<TDBVote>;
   public
     constructor Create;
+    destructor Destroy; override;
     property Id: string read FId write FId;
     property CreatedOn: TDateTime read FCreatedOn write FCreatedOn;
     property Name: string read FName write FName;
@@ -36,6 +42,7 @@ type
     property Country: string read FCountry write FCountry;
     property Language: string read FLanguage write FLanguage;
     property LanguageInspiration: string read FLanguageInspiration write FLanguageInspiration;
+    property Votes: TList<TDBVote> read GetVotes;
   end;
 
   [Entity, Automapping]
@@ -62,7 +69,19 @@ implementation
 constructor TDBEntry.Create;
 begin
   inherited Create;
+  FVotes.SetInitialValue(TList<TDBVote>.Create);
   FCreatedOn := TDateTime.NowUTC;
+end;
+
+destructor TDBEntry.Destroy;
+begin
+  FVotes.DestroyValue;
+  inherited;
+end;
+
+function TDBEntry.GetVotes: TList<TDBVote>;
+begin
+  Result := FVotes.Value;
 end;
 
 { TDBVote }

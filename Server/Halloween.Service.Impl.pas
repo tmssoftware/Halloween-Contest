@@ -64,6 +64,7 @@ end;
 function THalloweenService.GetEntries(Per_Page: Integer = 0; Page: Integer = 0): TStream;
 var
   Entries: TObjectList<TEntryResult>;
+  DBEntries: TList<TCriteriaResult>;
 begin
   Entries := TObjectList<TEntryResult>.Create;
   Context.Handler.ManagedObjects.Add(Entries);
@@ -74,18 +75,29 @@ begin
   if Page < 0 then
     Page := 0;
 
-  for var DBEntry in Manager.Find<TDBEntry>
+  DBEntries := Manager.Find<TDBEntry>
+    .Select(TProjections.ProjectionList
+      .Add(Linq['Id'].Group.As_('Id'))
+      .Add(Linq['Name'].As_('Name'))
+      .Add(Linq['Description'].As_('Description'))
+      .Add(Linq['Votes.Id'].Count.As_('Votes'))
+    )
     .Take(Per_Page).Skip(Page * Per_Page)
-    .OrderBy('CreatedOn')
-    .Open do
-  begin
-    var EntryResult := TEntryResult.Create;
-    Entries.Add(EntryResult);
-    EntryResult.Id := DBEntry.Id;
-    EntryResult.Name := DBEntry.Name;
-    EntryResult.Description := DBEntry.Description;
-    EntryResult.Image := ImageUrl(DBEntry.Id);
-    EntryResult.Votes := Random(5);
+    .OrderBy('Votes', False)
+    .ListValues;
+  try
+    for var DBEntry in DBEntries do
+    begin
+      var EntryResult := TEntryResult.Create;
+      Entries.Add(EntryResult);
+      EntryResult.Id := DBEntry['Id'];
+      EntryResult.Name := DBEntry['Name'];
+      EntryResult.Description := DBEntry['Description'];
+      EntryResult.Image := ImageUrl(DBEntry['Id']);
+      EntryResult.Votes := DBEntry['Votes'];
+    end;
+  finally
+    DBEntries.Free;
   end;
   Result := TStringStream.Create(TJson.Serialize(Entries), TEncoding.UTF8);
 end;
