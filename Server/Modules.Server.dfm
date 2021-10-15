@@ -8,10 +8,15 @@ object HalloweenServerModule: THalloweenServerModule
     Pool = XDataConnectionPool1
     EntitySetPermissions = <>
     SwaggerOptions.Enabled = True
+    SwaggerOptions.AuthMode = Jwt
     SwaggerUIOptions.Enabled = True
     Left = 40
     Top = 24
     object XDataServer1CORS: TSparkleCorsMiddleware
+    end
+    object XDataServer1Basicauth: TSparkleBasicAuthMiddleware
+      Realm = 'TMS Sparkle Server'
+      OnAuthenticate = XDataServer1BasicauthAuthenticate
     end
   end
   object XDataConnectionPool1: TXDataConnectionPool

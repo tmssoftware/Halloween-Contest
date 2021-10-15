@@ -18,8 +18,9 @@ type
   public
     function AddEntry(Entry: TEntryData): string;
     function GetEntries(Per_Page: Integer = 0; Page: Integer = 0): TStream;
-    function GetPicture(Pic: string): TStream;
-    procedure AddVote(Entry: string);
+    function GetPicture(const Pic: string): TStream;
+    procedure AddVote(const Entry: string);
+    procedure DeleteEntry(const Entry: string);
   end;
 
 implementation
@@ -34,7 +35,7 @@ uses
 
 { THalloweenService }
 
-procedure THalloweenService.AddVote(Entry: string);
+procedure THalloweenService.AddVote(const Entry: string);
 var
   DBEntry: TDBEntry;
   IPAddress: string;
@@ -59,6 +60,17 @@ end;
 function THalloweenService.Context: TXDataOperationContext;
 begin
   Result := TXDataOperationContext.Current;
+end;
+
+procedure THalloweenService.DeleteEntry(const Entry: string);
+var
+  DBEntry: TDBEntry;
+begin
+  DBEntry := Manager.Find<TDBEntry>(Entry);
+  if DBEntry = nil then
+    raise EXDataHttpException.CreateFmt(400, 'Entry "%s" does not exist', [Entry]);
+
+  Manager.Remove(DBEntry);
 end;
 
 function THalloweenService.GetEntries(Per_Page: Integer = 0; Page: Integer = 0): TStream;
@@ -102,7 +114,7 @@ begin
   Result := TStringStream.Create(TJson.Serialize(Entries), TEncoding.UTF8);
 end;
 
-function THalloweenService.GetPicture(Pic: string): TStream;
+function THalloweenService.GetPicture(const Pic: string): TStream;
 var
   FileName: string;
 begin

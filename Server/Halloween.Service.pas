@@ -6,6 +6,7 @@ uses
   System.Generics.Collections, System.Classes,
   Bcl.Json.Attributes,
   Bcl.Json.NamingStrategies,
+  XData.Security.Attributes,
   XData.Service.Common;
 
 type
@@ -55,9 +56,12 @@ type
     [HttpGet] function GetEntries([XDefault(0)] Per_Page: Integer = 0;
       [XDefault(0)] Page: Integer = 0): TStream;
 
-    [HttpGet] function GetPicture(Pic: string): TStream;
+    [HttpGet] function GetPicture(const Pic: string): TStream;
 
-    procedure AddVote([FromQuery] Entry: string);
+    procedure AddVote([FromQuery] const Entry: string);
+
+    [AuthorizeScopes('admin')]
+    [HttpDelete] procedure DeleteEntry([FromQuery] const Entry: string);
   end;
 
 implementation
