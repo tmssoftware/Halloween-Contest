@@ -18,6 +18,11 @@ object HalloweenServerModule: THalloweenServerModule
       Realm = 'TMS Sparkle Server'
       OnAuthenticate = XDataServer1BasicauthAuthenticate
     end
+    object XDataServer1Forward: TSparkleForwardMiddleware
+      OnAcceptProxy = XDataServer1ForwardAcceptProxy
+      Left = 296
+      Top = 56
+    end
   end
   object XDataConnectionPool1: TXDataConnectionPool
     Connection = AureliusConnection1

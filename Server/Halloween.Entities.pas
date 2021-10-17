@@ -47,7 +47,7 @@ type
 
   [Entity, Automapping]
   [Table('Votes')]
-  [UniqueKey('IP_ADDRESS')]
+  [UniqueKey('ENTRY_ID,IP_ADDRESS')]
   TDBVote = class
   private
     FId: Integer;

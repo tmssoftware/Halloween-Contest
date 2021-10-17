@@ -6,6 +6,7 @@ uses
   System.Generics.Collections, System.Classes,
   Bcl.Json.Attributes,
   Bcl.Json.NamingStrategies,
+  XData.Query,
   XData.Security.Attributes,
   XData.Service.Common;
 
@@ -31,6 +32,19 @@ type
     property Image: TArray<Byte> read FImage write FImage;
   end;
 
+  TEntriesQuery = class
+  private
+    FOrderBy: string;
+    FPer_Page: Integer;
+    FPage: Integer;
+    FDesc: Boolean;
+  public
+    property Per_Page: Integer read FPer_Page write FPer_Page;
+    property Page: Integer read FPage write FPage;
+    property OrderBy: string read FOrderBy write FOrderBy;
+    property Desc: Boolean read FDesc write FDesc;
+  end;
+
   [JsonNamingStrategy(TCamelCaseNamingStrategy)]
   TEntryResult = class
   private
@@ -39,12 +53,14 @@ type
     FDescription: string;
     FImage: string;
     FVotes: Integer;
+    FVoted: Boolean;
   public
     property Id: string read FId write Fid;
     property Name: string read FName write FName;
     property Description: string read FDescription write FDescription;
     property Image: string read FImage write FImage;
     property Votes: Integer read FVotes write FVotes;
+    property Voted: Boolean read FVoted write FVoted;
   end;
 
   [ServiceContract]
@@ -53,12 +69,14 @@ type
     ['{92B65735-3D8D-4C9B-A5F7-BB54F018C4E8}']
     function AddEntry(Entry: TEntryData): string;
 
-    [HttpGet] function GetEntries([XDefault(0)] Per_Page: Integer = 0;
-      [XDefault(0)] Page: Integer = 0): TStream;
+    [HttpGet] function GetEntries(Query: TEntriesQuery): TStream;
 
     [HttpGet] function GetPicture(const Pic: string): TStream;
 
     procedure AddVote([FromQuery] const Entry: string);
+
+    [Route('entries/{EntryId}/togglevote')]
+    function ToggleVote(EntryId: string): Boolean;
 
     [AuthorizeScopes('admin')]
     [HttpDelete] procedure DeleteEntry([FromQuery] const Entry: string);
