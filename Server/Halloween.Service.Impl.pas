@@ -4,10 +4,12 @@ interface
 
 uses
   System.Generics.Collections, System.Classes, System.SysUtils,
+  Aurelius.Criteria.Base,
   Aurelius.Engine.ObjectManager,
   XData.Query,
   XData.Server.Module,
   XData.Service.Common,
+  Halloween.Entities,
   Halloween.Service;
 
 const
@@ -16,15 +18,18 @@ const
 type
   [ServiceImplementation]
   THalloweenService = class(TInterfacedObject, IHalloweenService)
-  strict protected
+  strict
+  private
     function Manager: TObjectManager;
     function Context: TXDataOperationContext;
+    procedure GetEntryResults(Entries: TList<TEntryResult>; OnCriteria: TProc<TCriteria>);
   public
     function AddEntry(Entry: TEntryData): string;
     function GetEntries(Query: TEntriesQuery): TStream;
+    function GetEntry(EntryId: string): TEntryResult;
     function GetPicture(const Pic: string): TStream;
     procedure AddVote(const Entry: string);
-    function ToggleVote(EntryId: string): Boolean;
+    function ToggleVote(EntryId: string): TEntryResult;
     procedure DeleteEntry(const Entry: string);
   end;
 
@@ -35,8 +40,7 @@ uses
   Bcl.Json,
   Aurelius.Linq,
   XData.Sys.Exceptions,
-  Halloween.Utils,
-  Halloween.Entities;
+  Halloween.Utils;
 
 { THalloweenService }
 
@@ -81,7 +85,6 @@ end;
 function THalloweenService.GetEntries(Query: TEntriesQuery): TStream;
 var
   Entries: TObjectList<TEntryResult>;
-  DBEntries: TList<TCriteriaResult>;
 begin
   Entries := TObjectList<TEntryResult>.Create;
   Context.Handler.ManagedObjects.Add(Entries);
@@ -97,7 +100,47 @@ begin
     Query.Desc := True;
   end;
 
-  DBEntries := Manager.Find<TDBEntry>
+  GetEntryResults(Entries,
+    procedure(Criteria: TCriteria)
+    begin
+      Criteria
+        .Take(Query.Per_Page).Skip(Query.Page * Query.Per_Page)
+        .OrderBy(Query.OrderBy, not Query.Desc);
+    end);
+
+  Result := TStringStream.Create(TJson.Serialize(Entries), TEncoding.UTF8);
+end;
+
+function THalloweenService.GetEntry(EntryId: string): TEntryResult;
+var
+  Entries: TList<TEntryResult>;
+begin
+  Entries := TList<TEntryResult>.Create;
+  try
+    GetEntryResults(Entries,
+      procedure(Criteria: TCriteria)
+      begin
+        Criteria.Where(Linq.IdEq(EntryId));
+      end);
+
+    case Entries.Count of
+      0: Result := nil;
+      1: Result := Entries[0];
+    else
+      raise EInvalidOpException.CreateFmt('Entry id "%s" returned more than one entry', [EntryId])
+    end;
+  finally
+    Entries.Free;
+  end;
+end;
+
+procedure THalloweenService.GetEntryResults(Entries: TList<TEntryResult>;
+  OnCriteria: TProc<TCriteria>);
+var
+  DBEntries: TList<TCriteriaResult>;
+  Criteria: TCriteria;
+begin
+  Criteria := Manager.Find<TDBEntry>
     .Select(TProjections.ProjectionList
       .Add(Linq['Id'].Group.As_('Id'))
       .Add(Linq['Name'].As_('Name'))
@@ -107,10 +150,12 @@ begin
         Format(
           'exists(select v.id from votes v where v.entry_id = {Id} and v.ip_address = ''%s'')',
         [Context.Request.RemoteIp])).As_('Voted'))
-    )
-    .Take(Query.Per_Page).Skip(Query.Page * Query.Per_Page)
-    .OrderBy(Query.OrderBy, not Query.Desc)
-    .ListValues;
+    );
+
+  if Assigned(OnCriteria) then
+    OnCriteria(Criteria);
+
+  DBEntries := Criteria.ListValues;
   try
     for var DBEntry in DBEntries do
     begin
@@ -126,7 +171,6 @@ begin
   finally
     DBEntries.Free;
   end;
-  Result := TStringStream.Create(TJson.Serialize(Entries), TEncoding.UTF8);
 end;
 
 function THalloweenService.GetPicture(const Pic: string): TStream;
@@ -146,7 +190,7 @@ begin
   Result := TXDataOperationContext.Current.GetManager;
 end;
 
-function THalloweenService.ToggleVote(EntryId: string): Boolean;
+function THalloweenService.ToggleVote(EntryId: string): TEntryResult;
 var
   DBEntry: TDBEntry;
   IPAddress: string;
@@ -166,13 +210,12 @@ begin
     DBVote.Entry := DBEntry;
     DBVote.IPAddress := IPAddress;
     Manager.Save(DBVote);
-    Result := True;
   end
   else
   begin
     Manager.Remove(DBVote);
-    Result := False;
   end;
+  Result := GetEntry(EntryId);
 end;
 
 function THalloweenService.AddEntry(Entry: TEntryData): string;

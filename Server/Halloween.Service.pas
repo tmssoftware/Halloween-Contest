@@ -63,6 +63,21 @@ type
     property Voted: Boolean read FVoted write FVoted;
   end;
 
+  TEntryInfo = class(TEntryResult)
+  private
+    FCompany: string;
+    FEmail: string;
+    FCountry: string;
+    FLanguage: string;
+    FLanguageInspiration: string;
+  public
+    property Company: string read FCompany write FCompany;
+    property Email: string read FEmail write FEmail;
+    property Country: string read FCountry write FCountry;
+    property Language: string read FLanguage write FLanguage;
+    property LanguageInspiration: string read FLanguageInspiration write FLanguageInspiration;
+  end;
+
   [ServiceContract]
   [Route('')]
   IHalloweenService = interface(IInvokable)
@@ -71,12 +86,15 @@ type
 
     [HttpGet] function GetEntries(Query: TEntriesQuery): TStream;
 
+    [HttpGet, Route('entries/{EntryId}')]
+    function GetEntry(EntryId: string): TEntryResult;
+
     [HttpGet] function GetPicture(const Pic: string): TStream;
 
     procedure AddVote([FromQuery] const Entry: string);
 
     [Route('entries/{EntryId}/togglevote')]
-    function ToggleVote(EntryId: string): Boolean;
+    function ToggleVote(EntryId: string): TEntryResult;
 
     [AuthorizeScopes('admin')]
     [HttpDelete] procedure DeleteEntry([FromQuery] const Entry: string);
