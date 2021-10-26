@@ -1,0 +1,112 @@
+<html>
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  <title>TMS Web Project</title>
+  <style>
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between"
+    style="padding-left:1rem;padding-right:1rem;">
+    <div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsebar"
+        aria-controls="collapsebar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsebar">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link lead" href="#" id="overviewnav" style="-webkit-appearance:none; color:#fff"
+              title="Navigate to the submissions page">View submissions</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link lead" href="#" id="aboutnav" style="-webkit-appearance:none; color:#fff"
+              title="Navigate to the about page">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <span class="navbar-brand">RADoween</span>
+    <div style="width:10%"></div>
+  </nav>
+  <div class="container" style="background:rgba(0,0,0,0.70);border-radius:5px;">
+    <div
+      style="display: flex;justify-content: center;position: relative;margin-bottom: 0.5rem;margin-top: 0.5rem;max-height:400px;"
+      id="picture-control">
+      <span id="picturevalidationlabel" style="position: absolute; top: 5px; text-align: center; color: red;"></span>
+      <div style="position: absolute; top: 0; height:100%;" id="cameraelement">
+        <button class="btn-close btn-close-white" aria-label="Close" id="closeButton"
+          style="position:absolute;top:5px;right:5px;z-index:99999;"></button></div>
+      <img id="detailImageContainer" style="object-fit:contain; width:100%;">
+      <div style="position: absolute; bottom: 5px;">
+        <button id="startCamera" class="btn btn-halloween"><span class="material-icons">
+            photo_camera
+          </span>
+        </button>
+        <button id="ToggleCamera" class="btn btn-halloween"><span class="material-icons">
+            switch_camera
+          </span>
+        </button>
+      </div>
+    </div>
+    <div id="picuplaod" style="width: 100%; height: 75px; overflow:hidden; border-radius:5px; padding:-2px"></div>
+    <div style="display: flex; flex-direction: column;margin-top:5px;">
+      <div class="mb-3">
+        <span></span>
+        <textarea id="descriptionelement" style="resize: none; border:none" rows="4" placeholder="Description..."
+          Title="enter the description of your submissions here" class="form-control bg-dark text-white"></textarea>
+      </div>
+      <div class="mb-3">
+        <span id="namelabelelement" style="color: red;"></span>
+        <input type="text" class="form-control bg-dark text-white" id="nameinputelement" placeholder="*Name..."
+          style="border:none" Title="Enter your name here">
+      </div>
+      <div class="mb-3">
+        <span id="emaillabelelement" style="color: red;"></span>
+        <input type="text" class="form-control bg-dark text-white" id="emailinputelement" placeholder="*Email..."
+          style="border:none" title="Enter your email here">
+      </div>
+      <div class="mb-3">
+        <span></span>
+        <input type="text" class="form-control bg-dark text-white" id="companyinputelement" placeholder="Company..."
+          style="border:none" title="Enter your company here">
+      </div>
+      <div class="mb-3">
+        <span id="countrylabelelement" style="color: red;"></span>
+        <select id="countryselectelement" class="form-select text-white" style="border:none"
+          title="Select your country here"></select>
+      </div>
+      <div class="mb-3">
+        <span id="languagelabelelement" style="color: red;"></span>
+        <select id="languageselectelement" class="form-select text-white" style="border:none"
+          title="Select your language here"></select>
+      </div>
+      <div class="mb-3">
+        <span></span>
+        <textarea id="languagedescriptionelement" style="resize: none;border:none" rows="4"
+          placeholder="Language inspiration..." title="enter your language inspiration here"
+          class="form-control bg-dark text-white"></textarea>
+      </div>
+      <button id="submitbutton" class="btn btn-halloween" style="align-self: center;"
+        title="submit your entry here">submit</button>
+    </div>
+    <footer class="text-center text-lg-start text-muted" style="margin-top:1rem; padding-bottom:1rem;">
+      <div class="text-center"
+        style="display:flex; flex-direction: column;align-items:center;justify-content:center;width:100%">
+        <span>Powered By:</span>
+        <div style="display:flex; flex-direction: row; align-items: center; justify-content: center;">
+          <a class="text-reset fw-bold" href="https://www.tmssoftware.com/site/tmswebcoreintro.asp"
+            style="margin-left:5px" target="_blank"><img src="img/tmsweb.png"></a>
+          <a class="text-reset fw-bold" href="https://www.tmssoftware.com/site/tmsbizintro.asp" style="margin-left:5px"
+            target="_blank"><img src="img/tmsbiz.png"></a>
+          <a class="text-reset fw-bold" href="https://www.tmssoftware.com/site/default.asp" style="margin-left:5px"
+            target="_blank"><img src="img/tmslogo.png"></a>
+          <a class="text-reset fw-bold" href="https://www.embarcadero.com/products/delphi" style="margin-left:5px"
+            target="_blank"><img src="img/delphilogo.png"></a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+
+</html>

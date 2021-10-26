@@ -1,0 +1,81 @@
+<html>
+
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  <title>%vendor% Web Project</title>
+  <style>
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between"
+    style="padding-left:1rem;padding-right:1rem;">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsebar2"
+      aria-controls="collapsebar2" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse  justify-content-between" id="collapsebar2" style="flex-grow:0;">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link lead" id="overviewnav" style="-webkit-appearance:none; color:#fff"
+            title="Submit your own picture here">View submissions</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link lead" id="aboutnav" style="-webkit-appearance:none;color:#fff"
+            title="Navigate to the about page">About</a>
+        </li>
+      </ul>
+    </div>
+    <span class="navbar-brand">RADoween</span>
+    <div class="d-flex" style="display: flex; flex-direction:row;justify-content:space-between;align-items:center">
+      <span style="font-size:15px">Sort By: </span>
+      <div class="vl" style="display: flex; flex-direction:row;justify-content:space-between;align-items:center">
+        <a title="Sort by time submitted" class="nav-link hoverstyle" href="#" id="sortbutton"
+          style="-webkit-appearance:none; border-radius:5px;margin-left:4px;"><span class="material-icons"
+            id="sortbytimeicon" style="font-size:25px" title="Sort by time submitted">schedule</span></a>
+        <a title="Sort by name" class="nav-link hoverstyle" href="#" id="sortbutton2"
+          style="-webkit-appearance:none; border-radius:5px;margin-left:2px;"><span class="material-icons"
+            id="sortbyalphaicon" style="font-size:25px" title="Sort by name">sort_by_alpha</span></a>
+        <a title="Sort by votes" class="nav-link hoverstyle" href="#" id="sortbutton3"
+          style="-webkit-appearance:none; border-radius:5px;margin-left:2px;margin-right:2px;"><svg version="1.1"
+            id="Capa_1" xmlns="http://www.w3.org/2000/svg" id="sortbyvoteicon"
+            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 351.66 351.66" style="fill:#fff"
+            xml:space="preserve" height="25px">
+            <g>
+              <g>
+                <path d="M344.566,146.952c-18.4-56.8-61.6-68.4-94-68.4c-20.4,0-37.2,4.4-43.6,6.4l-2.8,0.8l-2.4-1.6c-4-2.4-8.4-4.4-12.8-5.6
+			                  c9.2-38.8,52-52,52-52l-19.6-20.8c0,0-12,1.2-29.6,15.2c-17.6,14.4-22,50.4-22,50.4s0.4,2.4,1.6,6c-6.4,0.8-12.8,3.2-18.4,7.2
+			                  l-2.4,1.6l-2.8-1.2c-0.4,0-20.8-7.2-46.4-7.2c-32.8,0-75.6,12-94,68.4c-15.6,47.2-6,102,24.8,144.4c24,33.2,56,52,88,52
+			                  c9.2,0,18.4-1.6,27.2-4.8l2.8-1.2l2.4,1.6c14.4,10,34.4,10.4,49.2,0.8l2.4-1.6l2.8,0.8c8,2.4,16.4,4,24.8,4c16,0,32-4.8,46.8-13.6
+			                  c15.2-8.8,28.8-22,40.8-38.4C350.166,248.152,359.766,193.352,344.566,146.952z M238.566,132.552c20.8,0,37.2,24.8,37.2,56.4
+			                  c0,0-18.8-32.8-37.2-32.8c-18.8,0-37.2,32.8-37.2,32.8C201.366,157.352,217.766,132.552,238.566,132.552z M117.366,132.552
+			                  c20.8,0,37.2,24.8,37.2,56.4c0,0-18.8-32.8-37.2-32.8c-18.8,0-37.2,32.8-37.2,32.8C80.166,157.352,96.566,132.552,117.366,132.552
+			                  z M261.366,269.352l-13.6-14.4l-45.2,29.6l-26.8-22l-26.4,22l-45.6-29.6l-14,14.4l-45.2-69.6l45.2,28.8l14-14.4l45.2,29.6l26.4-22
+			                  l26.4,22l46-29.6l14,14.4l45.2-28.8L261.366,269.352z" />
+              </g>
+            </g>
+          </svg></a>
+      </div>
+      <a class="nav-link hoverstyle" id="directionbutton"
+        style="-webkit-appearance:none; border-radius:5px; margin-left:2px;"></a>
+    </div>
+  </nav>
+  <div id="overviewcontainer" class="container"></div>
+  <footer class="text-center text-lg-start text-muted" style="padding-bottom:1rem;">
+    <div class="text-center"
+      style="display:flex; flex-direction: column;align-items:center;justify-content:center;width:100%">
+      <span>Powered By:</span>
+      <div style="display:flex; flex-direction: row; align-items: center; justify-content: center;">
+        <a class="text-reset fw-bold" href="https://www.tmssoftware.com/site/tmswebcoreintro.asp"
+          style="margin-left:5px" target="_blank"><img src="img/tmsweb.png"></a>
+        <a class="text-reset fw-bold" href="https://www.tmssoftware.com/site/tmsbizintro.asp" style="margin-left:5px"
+          target="_blank"><img src="img/tmsbiz.png"></a>
+        <a class="text-reset fw-bold" href="https://www.tmssoftware.com/site/default.asp" style="margin-left:5px"
+          target="_blank"><img src="img/tmslogo.png"></a>
+        <a class="text-reset fw-bold" href="https://www.embarcadero.com/products/delphi" style="margin-left:5px"
+          target="_blank"><img src="img/delphilogo.png"></a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
