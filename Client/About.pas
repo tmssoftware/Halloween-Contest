@@ -2,7 +2,7 @@
 { for Delphi & C++Builder                                                   }
 {                                                                           }
 { written by TMS Software                                                   }
-{            copyright ©  2021                                              }
+{            copyright (c)  2021                                            }
 {            Email : info@tmssoftware.com                                   }
 {            Web : https://www.tmssoftware.com                              }
 {                                                                           }
