@@ -92,6 +92,16 @@ object FrmEntry: TFrmEntry
     Visible = False
     WidthPercent = 100.000000000000000000
   end
+  object TitleLabel: TWebLabel
+    Left = 296
+    Top = 536
+    Width = 3
+    Height = 14
+    Color = clMenuBar
+    ElementID = 'titlelabelelement'
+    HeightPercent = 100.000000000000000000
+    WidthPercent = 100.000000000000000000
+  end
   object ShareEntryButton: TWebButton
     Left = 67
     Top = 457

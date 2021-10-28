@@ -38,6 +38,7 @@ type
     NavAboutButton: TWebButton;
     NavSubmission2Button: TWebButton;
     FromSubmitLabel: TWebLabel;
+    TitleLabel: TWebLabel;
     procedure NavSubmissionsButtonClick(Sender: TObject);
     procedure Form4Create(Sender: TOBject);
     procedure WebImageControl2Click(Sender: TObject);
@@ -117,7 +118,8 @@ begin
     try
       O := JSON.Parse(AResponse.ResponseText);
       DescriptionLabel.Caption := O.GetJSONValue('description');
-      NameLabel.Caption := O.GetJSONValue('name');
+      NameLabel.Caption :='-' + O.GetJSONValue('name');
+      TitleLabel.Caption := O.GetJSONValue('language');
       VotesLabel.Caption := O.GetJSONValue('votes');
       WebImageControl1.URL := BASEURL + 'getPicture?pic=' + O.GetJSONValue('image');
 

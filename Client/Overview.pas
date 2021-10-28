@@ -109,20 +109,22 @@ begin
       WebContinuousScroll1.ItemTemplate := '<div style="background:rgba(0,0,0,0.45);border-radius:5px;margin-bottom:5px;width:100%;" id="(%id%)Entry"> <div style="display: flex;align-items: center;justify-content: center;" >   '+
        '<img src="'+ BASEURL+ 'getpicture?pic=(%image%)" id="Like(%id%)" style="width: 100%;object-fit:contain;max-height:500px;"> </div> <div style="display: flex;flex-direction: row;justify-content: space-between;align-items:center;margin-right:5px;margin-left:5px;">   '+
        '<p style="font-size:12pt;margin: 0px"><img style="width: 50px;cursor:pointer" id="Post(%id%)" title="Vote on this entry"><b id="Vote(%id%)"> (%votes%) </b></p>   '+
-       '<span id="fav_count(%message_number%)"     style="text-align: center;padding: 5px 10px 10px 5px; margin: 0px; display: inline-block;word-wrap:break-word;width:65%"><xmp style="width:100%; word-wrap:break-word; margin: 5px 0px;white-space:pre-wrap;text-align-center"> (%name%)</xmp></span>'+
+       '<span id="fav_count(%message_number%)"     style="text-align: center;padding: 5px 10px 10px 5px; margin: 0px; display: inline-block;word-wrap:break-word;width:65%"><xmp style="width:100%; word-wrap:break-word; margin: 5px 0px;white-space:pre-wrap;text-align-center"> (%language%)</xmp></span>'+
        ' <button id="share(%id%)" class="btn btn-halloween"><span class="material-icons" title="Share this entry">share</span></button>' +
        '  </div> '+
-       ' <span style="text-overflow: ellipsis; margin: 0px;width:100%; word-wrap:break-word;"><b style="padding: 10px;">Description:</b> <xmp style="width:100%; word-wrap:break-word;white-space:pre-wrap;padding:0px 10px ; margin: 10px 0px;">(%description%)</xmp></span> </div>';
+       ' <span style="text-overflow: ellipsis; margin: 0px;width:100%; word-wrap:break-word;"><b style="padding: 10px;">Description:</b> <xmp style="width:100%; word-wrap:break-word;white-space:pre-wrap;padding:0px 10px ; margin: 10px 0px;">(%description%)</xmp>'
+        +'<xmp style="padding:10px; font-size:15px; font-style: italic">-(%name%)</xmp></span> </div>';
    end
    else
    begin
      WebContinuousScroll1.ItemTemplate := '<div style="background:rgba(0,0,0,0.45);border-radius:5px;margin-bottom:5px;width:100%;" id="(%id%)Entry"> <div style="display: flex;align-items: center;justify-content: center;" >   '+
        '<img src="'+ BASEURL+ 'getpicture?pic=(%image%)" id="Like(%id%)" style="width: 100%;object-fit:contain;height:500px;"> </div> <div style="display: flex;flex-direction: row;justify-content: space-between;align-items:center;margin-right:5px;margin-left:5px;">   '+
        '<p style="font-size:12pt;margin: 0px"><img style="width: 50px;cursor:pointer" id="Post(%id%)" title="Vote on this entry"><b id="Vote(%id%)"> (%votes%) </b></p>   '+
-       '<span id="fav_count(%message_number%)"     style="text-align: center;padding: 5px 10px 10px 5px; margin: 0px; display: inline-block;word-wrap:break-word;width:65%"><xmp style="width:100%; word-wrap:break-word; margin: 5px 0px;white-space:pre-wrap;text-align-center"> (%name%)</xmp></span>'+
+       '<span id="fav_count(%message_number%)"     style="text-align: center;padding: 5px 10px 10px 5px; margin: 0px; display: inline-block;word-wrap:break-word;width:65%"><xmp style="width:100%; word-wrap:break-word; margin: 5px 0px;white-space:pre-wrap;text-align-center"> (%language%)</xmp></span>'+
        ' <button id="share(%id%)" class="btn btn-halloween"><span class="material-icons" title="Share this entry">share</span></button>' +
        '  </div> '+
-       ' <span style="text-overflow: ellipsis; margin: 0px;width:100%; word-wrap:break-word;"><b style="padding: 10px;">Description:</b><xmp style="width:100%; word-wrap:break-word;white-space:pre-wrap;padding:0px 10px ; margin: 10px 0px;">(%description%)</xmp></span> </div>';
+      ' <span style="text-overflow: ellipsis; margin: 0px;width:100%; word-wrap:break-word;"><b style="padding: 10px;">Description:</b> <xmp style="width:100%; word-wrap:break-word;white-space:pre-wrap;padding:0px 10px ; margin: 10px 0px;">(%description%)</xmp>'
+        +'<xmp style="padding:0px 10px; font-size: 15px; font-style: italic">-(%name%)</xmp></span> </div>';
    end;
 end;
 
