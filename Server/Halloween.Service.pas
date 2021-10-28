@@ -54,28 +54,15 @@ type
     FImage: string;
     FVotes: Integer;
     FVoted: Boolean;
+    FLanguage: string;
   public
     property Id: string read FId write Fid;
     property Name: string read FName write FName;
     property Description: string read FDescription write FDescription;
+    property Language: string read FLanguage write FLanguage;
     property Image: string read FImage write FImage;
     property Votes: Integer read FVotes write FVotes;
     property Voted: Boolean read FVoted write FVoted;
-  end;
-
-  TEntryInfo = class(TEntryResult)
-  private
-    FCompany: string;
-    FEmail: string;
-    FCountry: string;
-    FLanguage: string;
-    FLanguageInspiration: string;
-  public
-    property Company: string read FCompany write FCompany;
-    property Email: string read FEmail write FEmail;
-    property Country: string read FCountry write FCountry;
-    property Language: string read FLanguage write FLanguage;
-    property LanguageInspiration: string read FLanguageInspiration write FLanguageInspiration;
   end;
 
   [ServiceContract]

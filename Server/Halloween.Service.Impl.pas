@@ -145,6 +145,7 @@ begin
       .Add(Linq['Id'].Group.As_('Id'))
       .Add(Linq['Name'].As_('Name'))
       .Add(Linq['Description'].As_('Description'))
+      .Add(Linq['Language'].As_('Language'))
       .Add(Linq['Votes.Id'].Count.As_('Votes'))
       .Add(TProjections.Sql<Boolean>(
         Format(
@@ -164,6 +165,7 @@ begin
       EntryResult.Id := DBEntry['Id'];
       EntryResult.Name := DBEntry['Name'];
       EntryResult.Description := DBEntry['Description'];
+      EntryResult.Language := DBEntry['Language'];
       EntryResult.Image := ImageUrl(DBEntry['Id']);
       EntryResult.Votes := DBEntry['Votes'];
       EntryResult.Voted := DBEntry['Voted'];
