@@ -88,12 +88,12 @@ object FrmSubmit: TFrmSubmit
     ParentFont = False
     WidthPercent = 100.000000000000000000
   end
-  object LanguageValidation: TWebLabel
+  object TitleValidation: TWebLabel
     Left = 8
     Top = 511
     Width = 3
     Height = 14
-    ElementID = 'languagelabelelement'
+    ElementID = 'titlevalidationlabel'
     ElementPosition = epRelative
     Font.Charset = ANSI_CHARSET
     Font.Color = clBlack
@@ -131,39 +131,6 @@ object FrmSubmit: TFrmSubmit
       OnGetFileAsBase64 = ImagePickerGetFileAsBase64
       OnGetFileAsDataURL = WebFilePicker1GetFileAsDataURL
     end
-  end
-  object LanguageSelect: TWebComboBox
-    Left = 0
-    Top = 0
-    Width = 23
-    Height = 22
-    ElementID = 'languageselectelement'
-    ElementPosition = epRelative
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clBlack
-    Font.Height = -11
-    Font.Name = 'Arial'
-    Font.Style = []
-    HeightStyle = ssAuto
-    HeightPercent = 100.000000000000000000
-    ParentFont = False
-    Role = 'combobox'
-    Text = '-- select a language --'
-    WidthStyle = ssAuto
-    WidthPercent = 100.000000000000000000
-    ItemIndex = 0
-    Items.Strings = (
-      '-- select a language --'
-      'Delphi'
-      'C++'
-      'JavaScript'
-      'Python'
-      'Visual Basic'
-      'Java'
-      'Kotlin'
-      'C# '
-      'Go '
-      'Other')
   end
   object CountrySelect: TWebComboBox
     Left = 0
@@ -502,28 +469,6 @@ object FrmSubmit: TFrmSubmit
     WidthStyle = ssAuto
     WidthPercent = 100.000000000000000000
   end
-  object LanguageInspirationDescription: TWebMemo
-    Left = 8
-    Top = 682
-    Width = 865
-    Height = 78
-    AutoSize = False
-    ElementID = 'languagedescriptionelement'
-    ElementPosition = epRelative
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clBlack
-    Font.Height = -11
-    Font.Name = 'Arial'
-    Font.Style = []
-    HeightStyle = ssAuto
-    HeightPercent = 100.000000000000000000
-    ParentFont = False
-    Role = 'null'
-    SelLength = 0
-    SelStart = 0
-    WidthStyle = ssAuto
-    WidthPercent = 100.000000000000000000
-  end
   object WebHTMLDiv2: TWebHTMLDiv
     Left = 8
     Top = 263
@@ -625,5 +570,19 @@ object FrmSubmit: TFrmSubmit
     WidthStyle = ssAuto
     WidthPercent = 100.000000000000000000
     OnClick = CloseVideoButtonClick
+  end
+  object TitleEdit: TWebEdit
+    Left = 456
+    Top = 144
+    Width = 121
+    Height = 22
+    ChildOrder = 19
+    ElementID = 'titleinputelement'
+    ElementFont = efCSS
+    ElementPosition = epIgnore
+    HeightStyle = ssAuto
+    HeightPercent = 100.000000000000000000
+    WidthStyle = ssAuto
+    WidthPercent = 100.000000000000000000
   end
 end

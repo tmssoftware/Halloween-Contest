@@ -32,15 +32,13 @@ type
     ImagePreview: TWebImageControl;
     NameEdit: TWebEdit;
     CompanyEdit: TWebEdit;
-    LanguageSelect: TWebComboBox;
     PictureDescription: TWebMemo;
     CountrySelect: TWebComboBox;
-    LanguageInspirationDescription: TWebMemo;
     EmailEdit: TWebEdit;
     NameValidation: TWebLabel;
     EmailValidation: TWebLabel;
     CountryValidation: TWebLabel;
-    LanguageValidation: TWebLabel;
+    TitleValidation: TWebLabel;
     PictureValidation: TWebLabel;
     SubmitButton: TWebButton;
     ViewSubmissionsButton: TWebButton;
@@ -52,6 +50,7 @@ type
     WebFileUpload1: TWebFileUpload;
     WebCamera1: TWebCamera;
     CloseVideoButton: TWebButton;
+    TitleEdit: TWebEdit;
     procedure WebFilePicker1GetFileAsDataURL(Sender: TObject; AFileIndex: Integer; AURL: string);
     procedure ImagePickerGetFileAsBase64(Sender: TObject; AFileIndex: Integer; ABase64: string);
     [async]
@@ -228,8 +227,7 @@ begin
       O.AddPair('Email', EmailEdit.Text);
       O.AddPair('Description', PictureDescription.Text);
       O.AddPair('Country', CountrySelect.Items[CountrySelect.ItemIndex]);
-      O.AddPair('Language', LanguageSelect.Items[LanguageSelect.ItemIndex]);
-      O.AddPair('LanguageInspiration', LanguageInspirationDescription.Text);
+      O.AddPair('Language', TitleEdit.Text);
 
       // reduce image size client-side when larger than 1MB
       if (length(FBase64Image) > 1000000) then
@@ -312,15 +310,15 @@ begin
     CountryValidation.Caption := '';
   end;
 
-  if LanguageSelect.ItemIndex = 0 then
+  if TitleEdit.Text.Trim = '' then
   begin
     Result := False;
-    LanguageValidation.Caption := '* Please select a language';
+    TitleValidation.Caption := '* Please insert a title for your submission';
   end
   else
   begin
-    document.getElementById('languagelabelelement').innerHTML := '';
-    LanguageValidation.caption := '';
+    document.getElementById('titlevalidationlabel').innerHTML := '';
+    TitleValidation.caption := '';
   end;
   
   if (WebFileUpload1.Files.Count = 0) and (FBase64Image = '') then

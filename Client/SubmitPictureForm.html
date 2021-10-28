@@ -51,6 +51,11 @@
     </div>
     <div id="picuplaod" style="width: 100%; height: 75px; overflow:hidden; border-radius:5px; padding:-2px"></div>
     <div style="display: flex; flex-direction: column;margin-top:5px;">
+    <div class="mb-3">
+        <span id="titlevalidationlabel" style="color: red;"></span>
+        <input type="text" class="form-control bg-dark text-white" id="titleinputelement" placeholder="Insert Your title Here..."
+          style="border:none" title="Enter your submissions title here">
+      </div>
       <div class="mb-3">
         <span></span>
         <textarea id="descriptionelement" style="resize: none; border:none" rows="4" placeholder="Description..."
@@ -68,24 +73,13 @@
       </div>
       <div class="mb-3">
         <span></span>
-        <input type="text" class="form-control bg-dark text-white" id="companyinputelement" placeholder="Company..."
-          style="border:none" title="Enter your company here">
+        <input type="text" class="form-control bg-dark text-white" id="companyinputelement" placeholder="Company Or Partner's name..."
+          style="border:none" title="Enter your company or Parner's name here">
       </div>
       <div class="mb-3">
         <span id="countrylabelelement" style="color: red;"></span>
         <select id="countryselectelement" class="form-select text-white" style="border:none"
           title="Select your country here"></select>
-      </div>
-      <div class="mb-3">
-        <span id="languagelabelelement" style="color: red;"></span>
-        <select id="languageselectelement" class="form-select text-white" style="border:none"
-          title="Select your language here"></select>
-      </div>
-      <div class="mb-3">
-        <span></span>
-        <textarea id="languagedescriptionelement" style="resize: none;border:none" rows="4"
-          placeholder="Language inspiration..." title="enter your language inspiration here"
-          class="form-control bg-dark text-white"></textarea>
       </div>
       <button id="submitbutton" class="btn btn-halloween" style="align-self: center;"
         title="submit your entry here">submit</button>
