@@ -184,6 +184,7 @@ begin
     raise EXDataHttpException.CreateFmt(404, 'Image "%s" not found', [Pic]);
 
   Context.Response.ContentType := 'image/jpeg';
+  Context.Response.Headers.SetValue('cache-control', 'public, max-age=15552000');
   Result := TFileStream.Create(FileName, fmOpenRead + fmShareDenyNone);
 end;
 
