@@ -38,6 +38,7 @@ var
 implementation
 
 uses
+  Sparkle.App.Config,
   Aurelius.Sql.Register,
   Halloween.Utils,
   System.IOUtils;
@@ -50,6 +51,10 @@ procedure THalloweenServerModule.DataModuleCreate(Sender: TObject);
 var
   BaseUrl: string;
 begin
+  SparkleAppConfig.WinService.Name := 'RADoween';
+  SparkleAppConfig.WinService.DisplayName := 'TMS RADoween server';
+  SparkleAppConfig.WinService.Description := 'TMS XData-based API server backend for the RADoween application';
+
   BaseUrl := GetEnvironmentVariable('HALLOWEEN_BASE_URL');
   if BaseUrl <> '' then
     XDataServer1.BaseUrl := BaseUrl;

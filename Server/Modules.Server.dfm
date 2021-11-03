@@ -7,7 +7,9 @@ object HalloweenServerModule: THalloweenServerModule
     BaseUrl = 'http://+:2001/tms/halloween'
     Pool = XDataConnectionPool1
     EntitySetPermissions = <>
+    SwaggerOptions.Enabled = True
     SwaggerOptions.AuthMode = Jwt
+    SwaggerUIOptions.Enabled = True
     Left = 40
     Top = 24
     object XDataServer1CORS: TSparkleCorsMiddleware
